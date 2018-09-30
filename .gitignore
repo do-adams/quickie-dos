@@ -1,3 +1,6 @@
+# Compiled Front End Files
+dist/
+
 # Logs
 logs
 *.log

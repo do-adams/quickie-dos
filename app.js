@@ -1,10 +1,15 @@
 'use strict';
 
+require('dotenv').config();
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const webpack = require('webpack');
+const webpackMiddleware = require('webpack-dev-middleware');
+const webpackConfig = require('./webpack.config');
 
 const indexRouter = require('./routes/index');
 
@@ -18,7 +23,14 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// static assets setup
 app.use(express.static(path.join(__dirname, 'public')));
+if (process.env.NODE_ENV !== 'production') {
+  // Fetch webpack bundle from memory instead of dist/ when debugging
+  app.use(webpackMiddleware(webpack(webpackConfig)));
+}
+app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use('/', indexRouter);
 
