@@ -1,5 +1,9 @@
 'use strict';
 
+// SCSS
+require('./scss/main.scss');
+
+// Stimulus
 import { Application } from 'stimulus';
 import { definitionsFromContext } from 'stimulus/webpack-helpers';
 
@@ -7,4 +11,6 @@ const application = Application.start();
 const context = require.context('./controllers', true, /\.js$/);
 application.load(definitionsFromContext(context));
 
-require('./scss/main.scss');
+// Turbolinks
+const Turbolinks = require('turbolinks');
+Turbolinks.start();
