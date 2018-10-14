@@ -7,10 +7,8 @@ require('dotenv').config();
 const path = require('path');
 
 const Koa = require('koa');
-const Router = require('koa-router');
 
 const app = new Koa();
-const router = new Router();
 const render = require('koa-ejs');
 
 const logger = require('koa-logger');
@@ -27,11 +25,8 @@ render(app, {
   debug: process.env.NODE_ENV !== 'production' ? true : false
 });
 
-router.get('/', async ctx => {
-	await ctx.render('hello');
-});
+const indexRoutes = rootRequire('routes/index');
 
-app.use(router.routes());
-app.use(router.allowedMethods());
+app.use(indexRoutes.routes());
 
 module.exports = app;
