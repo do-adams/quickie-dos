@@ -1,0 +1,22 @@
+{
+  "name": "quickie-dos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/do-adams/quickie-dos.git"
+  },
+  "author": "Damián Adams",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/do-adams/quickie-dos/issues"
+  },
+  "homepage": "https://github.com/do-adams/quickie-dos#readme",
+  "devDependencies": {
+    "dotenv": "^6.1.0"
+  }
+}
