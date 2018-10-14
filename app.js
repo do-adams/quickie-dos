@@ -5,17 +5,9 @@ global.rootRequire = name => require(`${__dirname}/${name}`);
 require('dotenv').config();
 
 const path = require('path');
-
 const Koa = require('koa');
-
 const app = new Koa();
 const render = require('koa-ejs');
-
-const logger = require('koa-logger');
-
-if (process.env.NODE_ENV !== 'production') {
-	app.use(logger());
-}
 
 render(app, {
   root: path.join(__dirname, 'views'),
@@ -24,6 +16,15 @@ render(app, {
   cache: false,
   debug: process.env.NODE_ENV !== 'production' ? true : false
 });
+
+const logger = require('koa-logger');
+const serve = require('koa-static');
+
+if (process.env.NODE_ENV !== 'production') {
+	app.use(logger());
+}
+
+app.use(serve(path.join(__dirname, 'public')));
 
 const indexRoutes = rootRequire('routes/index');
 
