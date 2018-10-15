@@ -40,6 +40,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 app.use(helmet());
 app.use(serve(path.join(__dirname, 'public')));
+app.use(serve(path.join(__dirname, 'dist')));
 app.use(bodyParser());
 app.use(override());
 

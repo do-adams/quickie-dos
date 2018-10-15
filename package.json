@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./bin/www",
+    "build": "webpack",
+    "start": "npm run build && node ./bin/www",
     "debug": "nodemon --inspect ./bin/www"
   },
   "repository": {
@@ -19,8 +20,20 @@
   },
   "homepage": "https://github.com/do-adams/quickie-dos#readme",
   "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-loader": "^8.0.4",
+    "bulma": "^0.7.2",
+    "css-loader": "^1.0.0",
     "dotenv": "^6.1.0",
-    "nodemon": "^1.18.4"
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "node-sass": "^4.9.3",
+    "nodemon": "^1.18.4",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
   },
   "dependencies": {
     "ejs": "^2.6.1",
