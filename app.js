@@ -5,6 +5,17 @@ global.rootRequire = name => require(`${__dirname}/${name}`);
 require('dotenv').config();
 
 const path = require('path');
+
+const mongoose = require('mongoose');
+
+const dbUrl = process.env.DATABASE_URL || 'mongodb://localhost/quickie_dos';
+mongoose.connect(dbUrl, { useNewUrlParser: true }, function(err) {
+	if (err) {
+		console.error(err.message);
+		process.exit(1);
+	}
+});
+
 const Koa = require('koa');
 const app = new Koa();
 const render = require('koa-ejs');
