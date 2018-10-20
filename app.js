@@ -42,6 +42,8 @@ const override = require('koa-override');
 const session = require('koa-session');
 const flash = require('koa-better-flash');
 const passport = require('koa-passport');
+const LocalStrategy = require('passport-local').Strategy;
+
 
 if (process.env.NODE_ENV !== 'production') {
 	app.use(logger());
@@ -75,6 +77,14 @@ app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+// passport.use(new LocalStrategy((username, password, done) => {}));
+
+// passport.serializeUser(async (user, done) => {
+// 	return done(null, user._id);
+// });
+
+// passport.deserializeUser(async (id, done) => {});
 
 // KOA ROUTES SETUP
 
