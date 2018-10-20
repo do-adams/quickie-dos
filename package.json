@@ -50,6 +50,7 @@
     "koa-static": "^5.0.0",
     "mongoose": "^5.3.3",
     "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^5.0.1",
     "stimulus": "^1.1.0",
     "turbolinks": "^5.2.0"
   }
