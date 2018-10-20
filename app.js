@@ -41,6 +41,7 @@ const bodyParser = require('koa-bodyparser');
 const override = require('koa-override');
 const session = require('koa-session');
 const flash = require('koa-better-flash');
+const passport = require('koa-passport');
 
 if (process.env.NODE_ENV !== 'production') {
 	app.use(logger());
@@ -53,6 +54,7 @@ app.use(bodyParser());
 app.use(override());
 
 // KOA SESSION MIDDLEWARE
+
 app.keys = [process.env.SESSION_KEY || 'secret session development key'];
 
 const CONFIG = {
@@ -68,6 +70,11 @@ const CONFIG = {
 
 app.use(session(CONFIG, app));
 app.use(flash());
+
+// KOA PASSPORT MIDDLEWARE
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // KOA ROUTES SETUP
 
