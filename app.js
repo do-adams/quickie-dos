@@ -40,6 +40,7 @@ const serve = require('koa-static');
 const bodyParser = require('koa-bodyparser');
 const override = require('koa-override');
 const session = require('koa-session');
+const flash = require('koa-better-flash');
 
 if (process.env.NODE_ENV !== 'production') {
 	app.use(logger());
@@ -66,6 +67,7 @@ const CONFIG = {
 };
 
 app.use(session(CONFIG, app));
+app.use(flash());
 
 // KOA ROUTES SETUP
 
