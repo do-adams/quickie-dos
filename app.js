@@ -1,53 +1,51 @@
 'use strict';
 
+global.rootRequire = name => require(`${__dirname}/${name}`);
+
 require('dotenv').config();
 
-const createError = require('http-errors');
-const express = require('express');
 const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const webpack = require('webpack');
-const webpackMiddleware = require('webpack-dev-middleware');
-const webpackConfig = require('./webpack.config');
 
-const indexRouter = require('./routes/index');
+const mongoose = require('mongoose');
 
-const app = express();
+const dbUrl = process.env.DATABASE_URL || 'mongodb://localhost/quickie_dos';
+mongoose.connect(dbUrl, { useNewUrlParser: true }, function(err) {
+	if (err) {
+		console.error(err.message);
+		process.exit(1);
+	}
+});
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+const Koa = require('koa');
+const app = new Koa();
+const render = require('koa-ejs');
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+render(app, {
+  root: path.join(__dirname, 'views'),
+  layout: 'layouts/index',
+  viewExt: 'ejs',
+  cache: false,
+  debug: process.env.NODE_ENV !== 'production' ? true : false
+});
 
-// static assets setup
-app.use(express.static(path.join(__dirname, 'public')));
+const logger = require('koa-logger');
+const helmet = require('koa-helmet');
+const serve = require('koa-static');
+const bodyParser = require('koa-bodyparser');
+const override = require('koa-override');
+
 if (process.env.NODE_ENV !== 'production') {
-  // Fetch webpack bundle from memory instead of dist/ when debugging
-  app.use(webpackMiddleware(webpack(webpackConfig)));
+	app.use(logger());
 }
-app.use(express.static(path.join(__dirname, 'dist')));
 
-app.use('/', indexRouter);
+app.use(helmet());
+app.use(serve(path.join(__dirname, 'public')));
+app.use(serve(path.join(__dirname, 'dist')));
+app.use(bodyParser());
+app.use(override());
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+const indexRoutes = rootRequire('routes/index');
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+app.use(indexRoutes.routes());
 
 module.exports = app;

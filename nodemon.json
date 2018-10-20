@@ -1,3 +1,6 @@
 {
-	"ignore": ["src/"]
+	"ignore": ["dist/"],
+	"events": {
+		"restart": "npm run build"
+	  }
 }

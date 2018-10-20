@@ -1,39 +1,13 @@
 {
   "name": "quickie-dos",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "build": "webpack",
-    "start": "npm run build && node ./bin/www",
-    "debug": "nodemon ./bin/www"
-  },
-  "dependencies": {
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.9",
-    "dotenv": "^6.0.0",
-    "ejs": "~2.5.7",
-    "express": "~4.16.0",
-    "http-errors": "~1.6.2",
-    "morgan": "~1.9.0",
-    "stimulus": "^1.1.0",
-    "turbolinks": "^5.2.0",
-    "webpack-dev-middleware": "^3.4.0"
-  },
+  "version": "1.0.0",
   "description": "",
   "main": "app.js",
-  "devDependencies": {
-    "@babel/core": "^7.1.2",
-    "@babel/plugin-proposal-class-properties": "^7.1.0",
-    "@babel/preset-env": "^7.1.0",
-    "babel-loader": "^8.0.4",
-    "bulma": "^0.7.1",
-    "css-loader": "^1.0.0",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "node-sass": "^4.9.3",
-    "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.0",
-    "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.2"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "npm run build && node ./bin/www",
+    "debug": "nodemon --inspect ./bin/www"
   },
   "repository": {
     "type": "git",
@@ -44,5 +18,35 @@
   "bugs": {
     "url": "https://github.com/do-adams/quickie-dos/issues"
   },
-  "homepage": "https://github.com/do-adams/quickie-dos#readme"
+  "homepage": "https://github.com/do-adams/quickie-dos#readme",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-loader": "^8.0.4",
+    "bulma": "^0.7.2",
+    "css-loader": "^1.0.0",
+    "dotenv": "^6.1.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "node-sass": "^4.9.3",
+    "nodemon": "^1.18.4",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "koa": "^2.5.3",
+    "koa-bodyparser": "^4.2.1",
+    "koa-ejs": "^4.1.2",
+    "koa-helmet": "^4.0.0",
+    "koa-logger": "^3.2.0",
+    "koa-override": "^3.0.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "mongoose": "^5.3.3",
+    "stimulus": "^1.1.0",
+    "turbolinks": "^5.2.0"
+  }
 }
