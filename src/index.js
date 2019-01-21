@@ -1,4 +1,5 @@
 'use strict';
 
-// SCSS
 import './scss/main.scss';
+
+import './vue/setup';

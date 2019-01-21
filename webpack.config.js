@@ -4,6 +4,8 @@ require('dotenv').config();
 
 const path = require('path');
 
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -28,6 +30,18 @@ module.exports = {
         ]
       },
       {
+				test: /\.css$/,
+				use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+				]
+      },
+      {
         test: /\.scss$/,
         use: [
           MiniCssExtractPlugin.loader,
@@ -41,32 +55,38 @@ module.exports = {
               sourceMap: true
             }
           }]
-        }]
-      },
-      plugins: [
-        new MiniCssExtractPlugin({
-          filename: '[name].css',
-        })
-      ],
-      optimization: {
-        splitChunks: {
-          cacheGroups: {
-            styles: {
-              name: 'styles',
-              test: /\.css$/,
-              chunks: 'all',
-              enforce: true
-            }
-          }
         },
-        minimizer: [
-          new UglifyJsPlugin({
-            cache: true,
-            parallel: true,
-            sourceMap: true
-          }),
-          new OptimizeCSSAssetsPlugin({})
-        ]
-      }
-    };
-    
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader',
+        },
+      ]
+    },
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: '[name].css',
+      }),
+      new VueLoaderPlugin()
+    ],
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          styles: {
+            name: 'styles',
+            test: /\.css$/,
+            chunks: 'all',
+            enforce: true
+          }
+        }
+      },
+      minimizer: [
+        new UglifyJsPlugin({
+          cache: true,
+          parallel: true,
+          sourceMap: true
+        }),
+        new OptimizeCSSAssetsPlugin({})
+      ]
+    }
+  };
+  
