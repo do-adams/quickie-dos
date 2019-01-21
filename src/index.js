@@ -1,7 +1,7 @@
 'use strict';
 
 // SCSS
-require('./scss/main.scss');
+import './scss/main.scss';
 
 // Stimulus
 import { Application } from 'stimulus';
