@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "watch": "webpack --watch",
+    "build:watch": "webpack --watch",
     "start": "npm run build && node ./bin/www",
-    "debug": "npm run watch & nodemon --inspect ./bin/www"
+    "debug": "npm run build:watch & nodemon --inspect ./bin/www"
   },
   "repository": {
     "type": "git",
