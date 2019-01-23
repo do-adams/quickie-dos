@@ -3,12 +3,13 @@
 const path = require('path');
 
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'public', 'dist')
 	},
 	mode: process.env.NODE_ENV || 'development',
 	devtool: 'source-map',
@@ -59,6 +60,9 @@ module.exports = {
       ]
     },
     plugins: [
+      new CleanWebpackPlugin([
+        path.resolve(__dirname, 'public', 'dist')
+      ]),
       new VueLoaderPlugin()
     ]
   };

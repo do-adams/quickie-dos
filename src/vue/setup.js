@@ -1,6 +1,8 @@
 'use strict';
 
-import 'expose-loader?Vue!vue/dist/vue.common';
+import Vue from 'vue';
+
+window.Vue = Vue;
 
 import Hello from './components/Hello.vue';
 
