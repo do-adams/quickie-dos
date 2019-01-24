@@ -28,6 +28,11 @@ module.exports = {
 			},
 		]
 	},
+	resolve: {
+		alias: {
+			'vue$': 'vue/dist/vue.esm.js' // set alias for full build of Vue
+		}
+	},
 	plugins: [
 		new CleanWebpackPlugin([
 			path.resolve(__dirname, 'public', 'dist')
