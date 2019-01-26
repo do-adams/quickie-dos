@@ -11,8 +11,7 @@ app.set('view engine', 'pug');
 
 app.use(express.static('public'));
 
-app.get('/', (req, res) => {
-  res.render('index');
-});
+const indexRoutes = require('./routes/index');
+app.use(indexRoutes);
 
 app.listen(PORT, () => console.log('Server is running on port: ' + PORT));
