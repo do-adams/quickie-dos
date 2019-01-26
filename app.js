@@ -1,7 +1,10 @@
 'use strict';
 
 require('dotenv').config();
+
 const PORT = process.env.PORT || 3000;
+
+require('./config/mongodb');
 
 const express = require('express');
 const app = express();
