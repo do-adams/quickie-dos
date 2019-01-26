@@ -9,7 +9,11 @@ require('./config/mongodb');
 const express = require('express');
 const app = express();
 
+const cookieParser = require('cookie-parser');
+
 app.set('view engine', 'pug');
+app.use(cookieParser());
+app.use(express.urlencoded());
 
 app.use(express.static('public'));
 
