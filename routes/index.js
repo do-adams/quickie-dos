@@ -1,10 +1,10 @@
 'use strict';
 
-const Router = require('koa-router');
-const router = new Router();
+const express = require('express');
+const router = express.Router();
 
-router.get('/', async ctx => {
-	await ctx.render('hello');
+router.get('/', (req, res) => {
+	res.render('index');
 });
 
 module.exports = router;
